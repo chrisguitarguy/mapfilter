@@ -21,6 +21,18 @@ func TestFilter_ReturnsSequenceWithOnlyIncludedValues(t *testing.T) {
 	}
 }
 
+func TestFilter_EarlyReturnSmokeTest(t *testing.T) {
+	seq := slices.Values([]int{1, 2, 3, 4, 5})
+
+	result := mapfilter.Filter(seq, func(i int) bool {
+		return i%2 == 0
+	})
+
+	for range result {
+		break
+	}
+}
+
 func TestFilter2_ReturnsSequenceWithOnlyIncludedValues(t *testing.T) {
 	seq := slices.All([]int{1, 2, 3, 4, 5})
 
@@ -32,5 +44,17 @@ func TestFilter2_ReturnsSequenceWithOnlyIncludedValues(t *testing.T) {
 
 	if !slices.Equal([]int{2, 4}, realized) {
 		t.Errorf("expected [2, 4], got %#v", realized)
+	}
+}
+
+func TestFilter2_EarlyReturnSmokeTest(t *testing.T) {
+	seq := slices.All([]int{1, 2, 3, 4, 5})
+
+	result := mapfilter.Filter2(seq, func(k, v int) bool {
+		return v%2 == 0
+	})
+
+	for range result {
+		break
 	}
 }

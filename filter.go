@@ -12,7 +12,7 @@ func Filter[V any](seq iter.Seq[V], check func(V) bool) iter.Seq[V] {
 			}
 
 			if !yield(v) {
-				return
+				break
 			}
 		}
 	}
@@ -26,7 +26,7 @@ func Filter2[K, V any](seq iter.Seq2[K, V], check func(K, V) bool) iter.Seq2[K, 
 			}
 
 			if !yield(k, v) {
-				return
+				break
 			}
 		}
 	}
